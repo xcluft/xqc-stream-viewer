@@ -13,34 +13,37 @@
             height: 100vh;
             margin: 0;
         }
+        .chat, .stream {
+            box-sizing: border-box;
+        }
         .chat {
-            width: 340px;
-            order: -1; /* Move the chat to the beginning of the flex container */
+            width: 30vw;
+            height: 100vh;
+            order: -1;
         }
         .stream {
             flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 70vw;
+            height: 100vh;
         }
         iframe {
             border: none;
-            height: 100%;
             width: 100%;
+            height: 100%;
             object-fit: fill;
         }
-        
+
         /* Change to column layout and adjust heights when screen width is 900px or less */
         @media (max-width: 900px) {
             .container {
                 flex-direction: column;
             }
             .chat, .stream {
-                height: 50%;
-                width: 100%;
+                width: 100vw;
+                height: 50vh;
             }
             .chat {
-                order: 2; /* Move the chat to the end */
+                order: 2;
             }
         }
     </style>
