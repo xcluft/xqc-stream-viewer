@@ -8,6 +8,7 @@
         }
         .container {
             display: flex;
+            flex-direction: row; /* Default to row for wider screens */
             width: 100vw;
             height: 100vh;
             margin: 0;
@@ -23,6 +24,17 @@
             border: none;
             height: 100%;
             width: 100%;
+        }
+
+        /* When the screen is 800px or less, stack the chat and the stream vertically */
+        @media (max-width: 800px) {
+            .container {
+                flex-direction: column;
+            }
+            .chat {
+                width: 100%; /* Make the chat take up the full width */
+                order: 1; /* Move the chat to the end of the container */
+            }
         }
     </style>
 </head>
