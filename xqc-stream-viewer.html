@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat {
+            width: 325px;
+            order: -1; /* Move the chat to the beginning of the flex container */
+        }
+        .stream {
+            flex-grow: 1;
+        }
+        iframe {
+            border: none;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="chat">
+            <iframe 
+                frameborder="0" 
+                scrolling="yes"
+                id="chat_embed" 
+                src="https://www.twitch.tv/embed/xqc/chat?parent=https://xcluft.github.io/xqc-stream-viewer&darkpopout" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="stream">
+            <iframe id="stream_embed" src="https://kick.com/xqc" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <button id="toggleButton" style="position: absolute; top: 10px; left: 10px;">Toggle Stream</button>
+
+    <script>
+        const toggleButton = document.getElementById('toggleButton');
+        const streamEmbed = document.getElementById('stream_embed');
+        let isKickStream = true;
+
+        toggleButton.addEventListener('click', () => {
+            if (isKickStream) {
+                streamEmbed.src = 'https://player.twitch.tv/?channel=xqc&parent=https://xcluft.github.io/xqc-stream-viewer';
+                isKickStream = false;
+            } else {
+                streamEmbed.src = 'https://kick.com/xqc';
+                isKickStream = true;
+            }
+        });
+    </script>
+</body>
+</html>
