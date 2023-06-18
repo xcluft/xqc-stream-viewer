@@ -19,15 +19,19 @@
         }
         .stream {
             flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         iframe {
             border: none;
             height: 100%;
             width: 100%;
+            object-fit: fill;
         }
         
-        /* Change to column layout and adjust heights when screen width is 600px or less */
-        @media (max-width: 600px) {
+        /* Change to column layout and adjust heights when screen width is 900px or less */
+        @media (max-width: 900px) {
             .container {
                 flex-direction: column;
             }
