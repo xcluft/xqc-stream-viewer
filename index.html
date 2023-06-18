@@ -19,20 +19,18 @@
         }
         .stream {
             flex-grow: 1;
-            position: relative;
-        }
-        .stream-embed {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         iframe {
             border: none;
+            height: 100%;
+            width: 100%;
+            object-fit: fill;
         }
         
-        /* Change to column layout and adjust heights when screen width is 600px or less */
+        /* Change to column layout and adjust heights when screen width is 900px or less */
         @media (max-width: 900px) {
             .container {
                 flex-direction: column;
@@ -55,13 +53,11 @@
                 scrolling="yes"
                 id="chat_embed" 
                 src="https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout" 
-                height="100%" 
-                width="100%"
                 allowfullscreen>
             </iframe>
         </div>
         <div class="stream">
-            <iframe class="stream-embed" id="stream_embed" src="https://kick.com/xqc" allowfullscreen></iframe>
+            <iframe id="stream_embed" src="https://kick.com/xqc" allowfullscreen></iframe>
         </div>
     </div>
 
