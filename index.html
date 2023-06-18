@@ -33,7 +33,7 @@
                 frameborder="0" 
                 scrolling="yes"
                 id="chat_embed" 
-                src="https://www.twitch.tv/embed/xqc/chat?parent=https://xcluft.github.io/xqc-stream-viewer&darkpopout" 
+                src="https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout" 
                 allowfullscreen>
             </iframe>
         </div>
@@ -51,7 +51,7 @@
 
         toggleButton.addEventListener('click', () => {
             if (isKickStream) {
-                streamEmbed.src = 'https://player.twitch.tv/?channel=xqc&parent=https://xcluft.github.io/xqc-stream-viewer';
+                streamEmbed.src = 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
                 isKickStream = false;
             } else {
                 streamEmbed.src = 'https://kick.com/xqc';
