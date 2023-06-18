@@ -15,12 +15,11 @@ Instructions
 
 Enhancing the Chat Experience with BetterTTV and 7TV Emotes
 
-To enhance your chat experience, you might want to enable BetterTTV and 7TV emotes. Here's how to do it:
+To enhance your chat experience, you'll want to install BetterTTV. Here's how to do it:
 
-    BetterTTV:
-        Visit the BetterTTV website and click on "Install".
-        Follow the instructions to add BetterTTV to your browser.
-        Once installed, go to a Twitch channel and click on the chat settings (the cogwheel icon, close to channel points, click "BetterTTV Settings").
-        Now just enable 7TV emotes and whatever else you wish.
+       1. Visit the BetterTTV website and click on "Install".
+       2. Follow the instructions to add BetterTTV to your browser.
+       3. Once installed, go to a Twitch channel and click on the chat settings (the cogwheel icon, close to channel points, click "BetterTTV Settings").
+       4. Now just enable 7TV emotes and whatever else you wish.
 
 Remember, these are browser extensions, so they'll affect all Twitch chats you view in your browser, not just the chat in this stream viewer.
