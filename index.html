@@ -8,7 +8,7 @@
         }
         .container {
             display: flex;
-            flex-direction: row; /* Default to row for wider screens */
+            flex-direction: row;
             width: 100vw;
             height: 100vh;
             margin: 0;
@@ -25,15 +25,18 @@
             height: 100%;
             width: 100%;
         }
-
-        /* When the screen is 800px or less, stack the chat and the stream vertically */
-        @media (max-width: 800px) {
+        
+        /* Change to column layout and adjust heights when screen width is 600px or less */
+        @media (max-width: 600px) {
             .container {
                 flex-direction: column;
             }
+            .chat, .stream {
+                height: 50%;
+                width: 100%;
+            }
             .chat {
-                width: 100%; /* Make the chat take up the full width */
-                order: 1; /* Move the chat to the end of the container */
+                order: 2; /* Move the chat to the end */
             }
         }
     </style>
