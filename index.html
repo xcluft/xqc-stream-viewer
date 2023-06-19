@@ -6,6 +6,16 @@
     <style>
         #stream-container, #chat-container {
             float: left;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #stream, #chat {
+            height: 100%;
+            width: 100%;
+            border: none;
+        }
+        #chat-container {
+            width: 340px;
         }
     </style>
     <script>
@@ -17,7 +27,7 @@
 
         function switchChat(source) {
             document.getElementById('chat').src = source == 'twitch' ?
-                'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io' :
+                'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout' :
                 'https://kick.com/xqc/chatroom';
         }
 
@@ -36,10 +46,10 @@
 </head>
 <body>
     <div id="stream-container">
-        <iframe id="stream" width="560" height="315" src="https://player.kick.com/xqc" frameborder="0"></iframe>
+        <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
     </div>
     <div id="chat-container">
-        <iframe id="chat" width="340" height="315" src="https://kick.com/xqc/chatroom" frameborder="0"></iframe>
+        <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
     </div>
     <div>
         <button onclick="switchStream('twitch'); switchChat('twitch');">Switch to Twitch</button>
