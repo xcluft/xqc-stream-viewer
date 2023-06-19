@@ -67,23 +67,5 @@
             <iframe id="stream_embed" src="https://player.kick.com/xqc" allowfullscreen></iframe>
         </div>
     </div>
-
-    <button id="toggleButton" style="position: absolute; top: 10px; left: 10px;">Toggle Stream</button>
-
-    <script>
-        const toggleButton = document.getElementById('toggleButton');
-        const streamEmbed = document.getElementById('stream_embed');
-        let isKickStream = true;
-
-        toggleButton.addEventListener('click', () => {
-            if (isKickStream) {
-                streamEmbed.src = 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
-                isKickStream = false;
-            } else {
-                streamEmbed.src = 'https://player.kick.com/xqc';
-                isKickStream = true;
-            }
-        });
-    </script>
 </body>
 </html>
