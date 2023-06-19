@@ -61,72 +61,82 @@
         </div>
     </div>
 <script>
-        var currentStream = getCookie('currentStream') || 'kick';
-        var stream = document.getElementById('stream');
-        var chat = document.getElementById('chat');
-        var body = document.body;
+    var currentStream = getCookie('currentStream') || 'kick';
+    var stream = document.getElementById('stream');
+    var chat = document.getElementById('chat');
+    var body = document.body;
 
-        stream.src = currentStream == 'kick' ? 'https://player.kick.com/xqc' : 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
-        chat.src = currentStream == 'kick' ? 'https://kick.com/xqc/chatroom' : 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+    stream.src = currentStream == 'kick' ? 'https://player.kick.com/xqc' : 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
+    chat.src = currentStream == 'kick' ? 'https://kick.com/xqc/chatroom' : 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
 
-        if (getCookie('chatPosition') === 'right') {
-            body.style.flexDirection = 'row-reverse';
+    if (getCookie('chatPosition') === 'right') {
+        body.style.flexDirection = 'row-reverse';
+    }
+
+    function toggleStream() {
+        if (currentStream == 'kick') {
+            currentStream = 'twitch';
+            stream.src = 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
+            chat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+
+            if (!getCookie('twitchLoginPromptShown')) {
+                window.open('https://www.twitch.tv/login?popup=true', '_blank');
+                setCookie('twitchLoginPromptShown', 'true', 365);
+            }
+        } else {
+            currentStream = 'kick';
+            stream.src = 'https://player.kick.com/xqc';
+            chat.src = 'https://kick.com/xqc/chatroom';
+
+            if (!getCookie('kickLoginPromptShown')) {
+                window.open('https://kick.com/login', '_blank');
+                setCookie('kickLoginPromptShown', 'true', 365);
+            }
         }
+        setCookie('currentStream', currentStream, 365);
+    }
 
-        function toggleStream() {
-            if (currentStream == 'kick') {
-                currentStream = 'twitch';
-                stream.src = 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
-                chat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+    function toggleChatPosition() {
+        if (window.innerWidth > 1000) {
+            if (body.style.flexDirection == 'row-reverse') {
+                body.style.flexDirection = 'row';
+                setCookie('chatPosition', 'left', 365);
             } else {
-                currentStream = 'kick';
-                stream.src = 'https://player.kick.com/xqc';
-                chat.src = 'https://kick.com/xqc/chatroom';
-            }
-            setCookie('currentStream', currentStream, 365);
-        }
-
-        function toggleChatPosition() {
-            if (window.innerWidth > 1000) {
-                if (body.style.flexDirection == 'row-reverse') {
-                    body.style.flexDirection = 'row';
-                    setCookie('chatPosition', 'left', 365);
-                } else {
-                    body.style.flexDirection = 'row-reverse';
-                    setCookie('chatPosition', 'right', 365);
-                }
+                body.style.flexDirection = 'row-reverse';
+                setCookie('chatPosition', 'right', 365);
             }
         }
+    }
 
-        window.addEventListener('resize', function() {
-            if (window.innerWidth <= 1000) {
-                body.style.flexDirection = 'column';
-            } else {
-                body.style.flexDirection = (getCookie('chatPosition') === 'right') ? 'row-reverse' : 'row';
-            }
-        });
-
-        function setCookie(cname, cvalue, exdays) {
-            var d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            var expires = "expires="+d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    window.addEventListener('resize', function() {
+        if (window.innerWidth <= 1000) {
+            body.style.flexDirection = 'column';
+        } else {
+            body.style.flexDirection = (getCookie('chatPosition') === 'right') ? 'row-reverse' : 'row';
         }
+    });
 
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
             }
-            return "";
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
         }
+        return "";
+    }
 </script>
 </body>
 </html>
