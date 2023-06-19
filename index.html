@@ -32,7 +32,7 @@
             z-index: 10;
         }
         #buttons button:first-child {
-            margin-right: 14px;
+            margin-right: 32px;
         }
     </style>
     <script>
@@ -57,12 +57,12 @@
 
             if (window.getComputedStyle(chatContainer).order == '2') {
                 chatContainer.style.order = '1';
-                buttons.style.right = '10px';
-                buttons.style.left = 'unset';
-            } else {
-                chatContainer.style.order = '2';
                 buttons.style.left = '10px';
                 buttons.style.right = 'unset';
+            } else {
+                chatContainer.style.order = '2';
+                buttons.style.right = '10px';
+                buttons.style.left = 'unset';
             }
         }
     </script>
