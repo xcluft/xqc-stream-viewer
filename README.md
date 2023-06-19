@@ -1,25 +1,24 @@
-**Twitch Stream Viewer**
+**xQc Stream Viewer**
 
-This project provides an integrated Twitch chat and stream viewer with a toggle feature for switching between Twitch and Kick.com streams. It is designed for fans of the streamer xQc and offers a seamless, all-in-one viewing experience.
-Features:
+The xQc Stream Viewer is a convenient interface designed to allow fans of the popular streamer xQc to easily switch between his Twitch and Kick streams. This web interface is hosted at https://xcluft.github.io/xqc-stream-viewer/.
+Features
 
-  * Integrated Twitch chat
-  * Switch between Twitch and Kick.com streams with a single click
+    Seamless switching between Twitch and Kick streams with a single click.
+    Easy swapping of chat positions to be either on the left or right side of the stream.
+    A responsive design that adjusts to different window sizes, providing an optimal viewing experience.
+    Minimalistic UI with essential controls.
 
-Instructions
+Usage
 
-  1. Visit the website at https://xcluft.github.io/xqc-stream-viewer.
-  2. If the Twitch stream is live, you'll see it on the page along with the chat.
-  3. To switch to the Kick.com stream, click the "Toggle Stream" button.
-  4. To switch back to the Twitch stream, click the "Toggle Stream" button again.
+Two buttons are provided for easy control:
 
-Enhancing the Chat Experience with BetterTTV and 7TV Emotes
+    Stream: Switches the streaming platform between Twitch and Kick.
+    Chat: Toggles the chat's position from left to right, and vice versa.
 
-To enhance your chat experience, you'll want to install BetterTTV. Here's how to do it:
+In compact mode (window width less than 1000px), the stream and chat interface stack vertically for a better viewing experience. The chat is always positioned underneath the stream in this mode.
+Contribution
 
-       1. Visit the BetterTTV website and click on "Install".
-       2. Follow the instructions to add BetterTTV to your browser.
-       3. Once installed, go to a Twitch channel and click on the chat settings (the cogwheel icon, close to channel points, click "BetterTTV Settings").
-       4. Now just enable 7TV emotes and whatever else you wish.
+Please feel free to contribute to the project by creating a pull request or opening an issue.
+Disclaimer
 
-Remember, these are browser extensions, so they'll affect all Twitch chats you view in your browser, not just the chat in this stream viewer.
+This is a fan-made project and is not officially affiliated with xQc or the streaming platforms Twitch and Kick.
