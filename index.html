@@ -95,12 +95,24 @@
                 if (chatContainer.style.order == '2') {
                     chatContainer.style.order = '1';
                     streamContainer.style.order = '2';
+                    document.body.style.flexDirection = 'row';
                 } else {
                     chatContainer.style.order = '2';
                     streamContainer.style.order = '1';
+                    document.body.style.flexDirection = 'row-reverse';
                 }
             }
         }
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 1000) {
+                chatContainer.style.order = '2';
+                streamContainer.style.order = '1';
+                document.body.style.flexDirection = 'column-reverse';
+            } else {
+                toggleChatPosition();
+            }
+        });
     </script>
 </body>
 </html>
