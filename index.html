@@ -8,6 +8,7 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: row;
             height: 100vh;
             width: 100vw;
             overflow: hidden;
@@ -38,13 +39,27 @@
             border: none;
             padding: 2px;
         }
+        @media (max-width: 1000px) {
+            body {
+                flex-direction: column;
+                height: 200vh; 
+            }
+            #stream-container, #chat-container {
+                width: 100%;
+                height: 50%;
+            }
+            #buttons {
+                top: unset;
+                bottom: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="stream-container" style="order: 2;">
+    <div id="stream-container">
         <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
     </div>
-    <div id="chat-container" style="order: 1;">
+    <div id="chat-container">
         <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
         <div id="buttons">
             <button onclick="toggleStream()">Stream</button>
@@ -70,10 +85,12 @@
         }
 
         function toggleChatPosition() {
-            if (window.getComputedStyle(chatContainer).order == '2') {
-                chatContainer.style.order = '1';
-            } else {
-                chatContainer.style.order = '2';
+            if (window.innerWidth > 1000) {
+                if (window.getComputedStyle(chatContainer).order == '2') {
+                    chatContainer.style.order = '1';
+                } else {
+                    chatContainer.style.order = '2';
+                }
             }
         }
     </script>
