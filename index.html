@@ -1,65 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Video Stream and Chat Box Switcher</title>
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-        .container {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100vw;
-            height: 100vh;
-            margin: 0;
-        }
-        .chat, .stream {
-            box-sizing: border-box;
-        }
-        .chat {
-            width: 340px;
-            max-width: 100%;
-            height: 100vh;
-            order: -1;
-            margin-right: auto;
-        }
-        .stream {
-            flex-grow: 1;
-            width: calc(100% - 340px);
-            height: 100vh;
-        }
-        iframe {
-            border: none;
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-        }
-
-        @media (max-width: 900px) {
-            .container {
-                flex-direction: column;
-                justify-content: normal;
-            }
-            .chat, .stream {
-                width: 100vw;
-                height: 50vh;
-                margin-right: 0;
-            }
-            .chat {
-                order: 2;
-            }
+        #stream-container, #chat-container {
+            float: left;
         }
     </style>
+    <script>
+        function switchStream(source) {
+            document.getElementById('stream').src = source == 'twitch' ? 
+                'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io' : 
+                'https://player.kick.com/xqc';
+        }
+
+        function switchChat(source) {
+            document.getElementById('chat').src = source == 'twitch' ?
+                'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io' :
+                'https://kick.com/xqc/chatroom';
+        }
+
+        function toggleChatPosition() {
+            var chatContainer = document.getElementById('chat-container');
+            var streamContainer = document.getElementById('stream-container');
+            if (chatContainer.style.float == 'left') {
+                chatContainer.style.float = 'right';
+                streamContainer.style.float = 'left';
+            } else {
+                chatContainer.style.float = 'left';
+                streamContainer.style.float = 'right';
+            }
+        }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <div class="chat">
-            <iframe src="https://beta.kick-chat.corard.tv/v1/chat?user=xqc&font-size=Small&stroke=Off&animate=true&badges=true&commands=true&bots=true&twitchuser=xqc" allowfullscreen></iframe>
-        </div>
-        <div class="stream">
-            <iframe id="stream_embed" src="https://player.kick.com/xqc" allowfullscreen></iframe>
-        </div>
+    <div id="stream-container">
+        <iframe id="stream" width="560" height="315" src="https://player.kick.com/xqc" frameborder="0"></iframe>
+    </div>
+    <div id="chat-container">
+        <iframe id="chat" width="340" height="315" src="https://kick.com/xqc/chatroom" frameborder="0"></iframe>
+    </div>
+    <div>
+        <button onclick="switchStream('twitch'); switchChat('twitch');">Switch to Twitch</button>
+        <button onclick="switchStream('kick'); switchChat('kick');">Switch to Kick</button>
+        <button onclick="toggleChatPosition()">Toggle chat position</button>
     </div>
 </body>
 </html>
