@@ -2,6 +2,7 @@
 
 The xQc Stream Viewer is a convenient interface designed to allow fans of the popular streamer xQc to easily switch between his Twitch and Kick streams. This web interface is hosted at https://xcluft.github.io/xqc-stream-viewer/.
 
+
 Features:
 
     Seamless switching between Twitch and Kick streams with a single click.
