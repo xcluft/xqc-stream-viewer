@@ -43,7 +43,13 @@
             body {
                 flex-direction: column;
             }
-            #stream-container, #chat-container {
+            #stream-container {
+                order: 1;
+                width: 100%;
+                height: 50vh;
+            }
+            #chat-container {
+                order: 2;
                 width: 100%;
                 height: 50vh;
             }
@@ -51,10 +57,10 @@
     </style>
 </head>
 <body>
-    <div id="stream-container" style="order: 2;">
+    <div id="stream-container">
         <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
     </div>
-    <div id="chat-container" style="order: 1;">
+    <div id="chat-container">
         <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
         <div id="buttons">
             <button onclick="toggleStream()">Stream</button>
