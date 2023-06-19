@@ -29,8 +29,10 @@
         #buttons {
             position: absolute;
             top: 10px;
-            left: 10px;
             z-index: 10;
+        }
+        #buttons button:first-child {
+            margin-right: 14px;
         }
     </style>
     <script>
@@ -51,19 +53,25 @@
         function toggleChatPosition() {
             var chatContainer = document.getElementById('chat-container');
             var streamContainer = document.getElementById('stream-container');
-            if (window.getComputedStyle(streamContainer).order == '2') {
-                streamContainer.style.order = '1';
+            var buttons = document.getElementById('buttons');
+
+            if (window.getComputedStyle(chatContainer).order == '2') {
+                chatContainer.style.order = '1';
+                buttons.style.right = '10px';
+                buttons.style.left = 'unset';
             } else {
-                streamContainer.style.order = '2';
+                chatContainer.style.order = '2';
+                buttons.style.left = '10px';
+                buttons.style.right = 'unset';
             }
         }
     </script>
 </head>
 <body>
-    <div id="stream-container" style="order: 1;">
+    <div id="stream-container" style="order: 2;">
         <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
     </div>
-    <div id="chat-container" style="order: 2;">
+    <div id="chat-container" style="order: 1;">
         <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
     </div>
     <div id="buttons">
