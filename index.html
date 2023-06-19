@@ -28,8 +28,16 @@
         }
         #buttons {
             position: absolute;
-            bottom: 10px;
+            top: 10px;
             z-index: 10;
+        }
+        #buttons button {
+            display: block;
+            margin-bottom: 10px;
+            color: white;
+            background: transparent;
+            border: none;
+            padding: 0;
         }
     </style>
     <script>
@@ -72,8 +80,8 @@
         <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
     </div>
     <div id="buttons">
-        <button onclick="toggleStream()">Toggle Stream Source</button>
-        <button onclick="toggleChatPosition()">Toggle Chat Position</button>
+        <button onclick="toggleStream()">Stream</button>
+        <button onclick="toggleChatPosition()">Chat</button>
     </div>
 </body>
 </html>
