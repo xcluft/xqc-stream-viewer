@@ -8,7 +8,6 @@
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: row;
             height: 100vh;
             width: 100vw;
             overflow: hidden;
@@ -41,7 +40,7 @@
         }
         @media (max-width: 1000px) {
             body {
-                flex-direction: column-reverse;
+                flex-direction: column;
             }
             #stream-container, #chat-container {
                 width: 100%;
@@ -93,7 +92,7 @@
 
         window.addEventListener('resize', function() {
             if (window.innerWidth <= 1000) {
-                body.style.flexDirection = 'column-reverse';
+                body.style.flexDirection = 'column';
             } else {
                 toggleChatPosition();
             }
