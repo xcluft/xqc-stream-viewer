@@ -57,10 +57,10 @@
     </style>
 </head>
 <body>
-    <div id="stream-container">
+    <div id="stream-container" style="order: 2;">
         <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
     </div>
-    <div id="chat-container">
+    <div id="chat-container" style="order: 1;">
         <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
         <div id="buttons">
             <button onclick="toggleStream()">Stream</button>
@@ -72,6 +72,11 @@
         var stream = document.getElementById('stream');
         var chat = document.getElementById('chat');
         var chatContainer = document.getElementById('chat-container');
+        var streamContainer = document.getElementById('stream-container');
+
+        // Set initial order values
+        streamContainer.style.order = '2';
+        chatContainer.style.order = '1';
 
         function toggleStream() {
             if (currentStream == 'kick') {
@@ -89,8 +94,10 @@
             if (window.innerWidth > 1000) {
                 if (chatContainer.style.order == '2') {
                     chatContainer.style.order = '1';
+                    streamContainer.style.order = '2';
                 } else {
                     chatContainer.style.order = '2';
+                    streamContainer.style.order = '1';
                 }
             }
         }
