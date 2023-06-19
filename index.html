@@ -41,15 +41,9 @@
         }
         @media (max-width: 1000px) {
             body {
-                flex-direction: column;
+                flex-direction: column-reverse;
             }
-            #stream-container {
-                order: 1;
-                width: 100%;
-                height: 50vh;
-            }
-            #chat-container {
-                order: 2;
+            #stream-container, #chat-container {
                 width: 100%;
                 height: 50vh;
             }
@@ -57,10 +51,10 @@
     </style>
 </head>
 <body>
-    <div id="stream-container" style="order: 2;">
+    <div id="stream-container">
         <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
     </div>
-    <div id="chat-container" style="order: 1;">
+    <div id="chat-container">
         <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
         <div id="buttons">
             <button onclick="toggleStream()">Stream</button>
@@ -73,10 +67,7 @@
         var chat = document.getElementById('chat');
         var chatContainer = document.getElementById('chat-container');
         var streamContainer = document.getElementById('stream-container');
-
-        // Set initial order values
-        streamContainer.style.order = '2';
-        chatContainer.style.order = '1';
+        var body = document.body;
 
         function toggleStream() {
             if (currentStream == 'kick') {
@@ -92,23 +83,17 @@
 
         function toggleChatPosition() {
             if (window.innerWidth > 1000) {
-                if (chatContainer.style.order == '2') {
-                    chatContainer.style.order = '1';
-                    streamContainer.style.order = '2';
-                    document.body.style.flexDirection = 'row';
+                if (body.style.flexDirection == 'row-reverse') {
+                    body.style.flexDirection = 'row';
                 } else {
-                    chatContainer.style.order = '2';
-                    streamContainer.style.order = '1';
-                    document.body.style.flexDirection = 'row-reverse';
+                    body.style.flexDirection = 'row-reverse';
                 }
             }
         }
 
         window.addEventListener('resize', function() {
             if (window.innerWidth <= 1000) {
-                chatContainer.style.order = '2';
-                streamContainer.style.order = '1';
-                document.body.style.flexDirection = 'column-reverse';
+                body.style.flexDirection = 'column-reverse';
             } else {
                 toggleChatPosition();
             }
