@@ -65,6 +65,7 @@
         var stream = document.getElementById('stream');
         var chat = document.getElementById('chat');
         var body = document.body;
+        var chatPosition = 'right';
 
         function toggleStream() {
             if (currentStream == 'kick') {
@@ -80,10 +81,12 @@
 
         function toggleChatPosition() {
             if (window.innerWidth > 1000) {
-                if (body.style.flexDirection == 'row-reverse') {
+                if (chatPosition == 'right') {
                     body.style.flexDirection = 'row';
+                    chatPosition = 'left';
                 } else {
                     body.style.flexDirection = 'row-reverse';
+                    chatPosition = 'right';
                 }
             }
         }
@@ -92,7 +95,11 @@
             if (window.innerWidth <= 1000) {
                 body.style.flexDirection = 'column';
             } else {
-                body.style.flexDirection = (body.style.flexDirection == 'row-reverse') ? 'row-reverse' : 'row';
+                if (chatPosition == 'right') {
+                    body.style.flexDirection = 'row-reverse';
+                } else {
+                    body.style.flexDirection = 'row';
+                }
             }
         });
     </script>
