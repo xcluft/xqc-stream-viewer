@@ -37,6 +37,18 @@
             padding: 2px;
         }
     </style>
+</head>
+<body>
+    <div id="stream-container" style="order: 2;">
+        <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
+    </div>
+    <div id="chat-container" style="order: 1;">
+        <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
+    </div>
+    <div id="buttons" style="left: 2px;">
+        <button onclick="toggleStream()">Stream</button>
+        <button onclick="toggleChatPosition()">Chat</button>
+    </div>
     <script>
         var currentStream = 'kick';
         var stream = document.getElementById('stream');
@@ -68,17 +80,5 @@
             }
         }
     </script>
-</head>
-<body>
-    <div id="stream-container" style="order: 2;">
-        <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
-    </div>
-    <div id="chat-container" style="order: 1;">
-        <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
-    </div>
-    <div id="buttons" style="left: 2px;">
-        <button onclick="toggleStream()">Stream</button>
-        <button onclick="toggleChatPosition()">Chat</button>
-    </div>
 </body>
 </html>
