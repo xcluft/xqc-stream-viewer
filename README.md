@@ -14,7 +14,7 @@ The xQc Stream Viewer is a convenient interface designed to allow fans of the po
 
 In compact mode, the stream and chat interface stack vertically for a better viewing experience. The chat is always positioned underneath the stream in this mode.
 
-## Logging In
+## Logging In:
 
 ### Twitch:
 To log in to Twitch, navigate to the Twitch chat and attempt to type a message. You will be presented with a prompt to log in, displaying the message "Login will open in a separate window." Follow the on-screen instructions to complete the login process. Please be aware that this will also log you into the Twitch player. As far as Twitch is concerned, you are directly on their site, which means you will continue to see your progress in vods, receive drops, moments, etc.
