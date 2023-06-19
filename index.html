@@ -22,10 +22,12 @@
         }
         #chat-container {
             width: 340px;
+            position: relative;
         }
         #buttons {
             position: absolute;
             top: 10px;
+            left: 3px;
             z-index: 10;
             display: flex;
         }
@@ -44,17 +46,16 @@
     </div>
     <div id="chat-container" style="order: 1;">
         <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
-    </div>
-    <div id="buttons" style="left: 2px;">
-        <button onclick="toggleStream()">Stream</button>
-        <button onclick="toggleChatPosition()">Chat</button>
+        <div id="buttons">
+            <button onclick="toggleStream()">Stream</button>
+            <button onclick="toggleChatPosition()">Chat</button>
+        </div>
     </div>
     <script>
         var currentStream = 'kick';
         var stream = document.getElementById('stream');
         var chat = document.getElementById('chat');
         var chatContainer = document.getElementById('chat-container');
-        var buttons = document.getElementById('buttons');
 
         function toggleStream() {
             if (currentStream == 'kick') {
@@ -71,12 +72,8 @@
         function toggleChatPosition() {
             if (window.getComputedStyle(chatContainer).order == '2') {
                 chatContainer.style.order = '1';
-                buttons.style.left = '2px';
-                buttons.style.right = 'unset';
             } else {
                 chatContainer.style.order = '2';
-                buttons.style.right = 'calc(100% - 342px)';
-                buttons.style.left = 'unset';
             }
         }
     </script>
