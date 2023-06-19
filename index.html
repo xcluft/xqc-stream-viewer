@@ -51,10 +51,10 @@
     </style>
 </head>
 <body>
-    <div id="stream-container">
+    <div id="stream-container" style="order: 2;">
         <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
     </div>
-    <div id="chat-container">
+    <div id="chat-container" style="order: 1;">
         <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
         <div id="buttons">
             <button onclick="toggleStream()">Stream</button>
@@ -81,7 +81,7 @@
 
         function toggleChatPosition() {
             if (window.innerWidth > 1000) {
-                if (window.getComputedStyle(chatContainer).order == '2') {
+                if (chatContainer.style.order == '2') {
                     chatContainer.style.order = '1';
                 } else {
                     chatContainer.style.order = '2';
