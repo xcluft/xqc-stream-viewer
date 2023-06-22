@@ -117,12 +117,12 @@ function toggleStream() {
 function toggleChat() {
     if (currentChat == 'kick') {
         currentChat = 'twitch';
-        twitchChat.style.display = 'block';
-        kickChat.style.display = 'none';
+        kickChat.style.visibility = 'hidden';
+        twitchChat.style.visibility = 'visible';
     } else {
         currentChat = 'kick';
-        kickChat.style.display = 'block';
-        twitchChat.style.display = 'none';
+        twitchChat.style.visibility = 'hidden';
+        kickChat.style.visibility = 'visible';
     }
     setCookie('currentChat', currentChat, 365);
 }
@@ -131,16 +131,16 @@ function toggleBothChats() {
     if (chatContainer.classList.contains('double')) {
         chatContainer.classList.remove('double');
         if (currentChat === 'kick') {
-            twitchChat.style.display = 'none';
-            kickChat.style.display = 'block';
+            twitchChat.style.visibility = 'hidden';
+            kickChat.style.visibility = 'visible';
         } else {
-            kickChat.style.display = 'none';
-            twitchChat.style.display = 'block';
+            kickChat.style.visibility = 'hidden';
+            twitchChat.style.visibility = 'visible';
         }
     } else {
         chatContainer.classList.add('double');
-        kickChat.style.display = 'block';
-        twitchChat.style.display = 'block';
+        kickChat.style.visibility = 'visible';
+        twitchChat.style.visibility = 'visible';
     }
 }
     
