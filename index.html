@@ -148,21 +148,15 @@
         if (chatContainer.classList.contains('double')) {
             chatContainer.classList.remove('double');
             if (currentChat === 'kick') {
-                twitchChat.style.visibility = 'hidden';
                 twitchChat.style.display = 'none';
-                kickChat.style.visibility = 'visible';
                 kickChat.style.display = 'block';
             } else {
-                twitchChat.style.visibility = 'visible';
                 twitchChat.style.display = 'block';
-                kickChat.style.visibility = 'hidden';
                 kickChat.style.display = 'none';
             }
         } else {
             chatContainer.classList.add('double');
-            twitchChat.style.visibility = 'visible';
             twitchChat.style.display = 'block';
-            kickChat.style.visibility = 'visible';
             kickChat.style.display = 'block';
         }
     }
