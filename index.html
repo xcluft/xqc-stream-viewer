@@ -15,21 +15,25 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: row;
             height: 100vh;
             width: 100vw;
             overflow: hidden;
         }
         iframe {
             height: 100%;
-            width: 100%;
+            width: 50%;
             border: none;
         }
-        #stream-container {
+        .stream-container {
             flex-grow: 1;
         }
-        #chat-container {
+        .chat-container {
             width: 340px;
             position: relative;
+        }
+        .chat-container.double {
+            width: 680px;
         }
         #buttons {
             position: absolute;
@@ -49,7 +53,7 @@
             body {
                 flex-direction: column;
             }
-            #stream-container, #chat-container {
+            .stream-container, .chat-container {
                 width: 100%;
                 height: 50vh;
             }
@@ -57,83 +61,113 @@
     </style>
 </head>
 <body>
-    <div id="stream-container">
+    <div id="stream-container" class="stream-container">
         <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
     </div>
-    <div id="chat-container">
-        <iframe id="chat" src="https://kick.com/xqc/chatroom"></iframe>
+    <div id="chat-container" class="chat-container">
+        <iframe id="kick-chat" src="https://kick.com/xqc/chatroom"></iframe>
+        <iframe id="twitch-chat" style="display: none;" src="https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout"></iframe>
         <div id="buttons">
             <button onclick="toggleStream()">Stream</button>
-            <button onclick="toggleChatPosition()">Chat</button>
+            <button onclick="toggleChat()">Chat</button>
+            <button onclick="toggleBothChats()">Both Chats</button>
+            <button onclick="toggleChatPosition()">Move Chat</button>
         </div>
     </div>
 <script>
-        var currentStream = getCookie('currentStream') || 'kick';
-        var stream = document.getElementById('stream');
-        var chat = document.getElementById('chat');
-        var body = document.body;
+    var currentStream = getCookie('currentStream') || 'kick';
+    var currentChat = getCookie('currentChat') || 'kick';
+    var stream = document.getElementById('stream');
+    var twitchChat = document.getElementById('twitch-chat');
+    var kickChat = document.getElementById('kick-chat');
+    var chatContainer = document.getElementById('chat-container');
+    var body = document.body;
 
-        stream.src = currentStream == 'kick' ? 'https://player.kick.com/xqc' : 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
-        chat.src = currentStream == 'kick' ? 'https://kick.com/xqc/chatroom' : 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+    stream.src = currentStream == 'kick' ? 'https://player.kick.com/xqc' : 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
+    kickChat.src = 'https://kick.com/xqc/chatroom';
+    twitchChat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
 
-        if (getCookie('chatPosition') === 'right') {
-            body.style.flexDirection = 'row-reverse';
+    if (getCookie('chatPosition') === 'right') {
+        body.style.flexDirection = 'row-reverse';
+    }
+
+    function toggleStream() {
+        if (currentStream == 'kick') {
+            currentStream = 'twitch';
+            stream.src = 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
+        } else {
+            currentStream = 'kick';
+            stream.src = 'https://player.kick.com/xqc';
         }
+        setCookie('currentStream', currentStream, 365);
+    }
 
-        function toggleStream() {
-            if (currentStream == 'kick') {
-                currentStream = 'twitch';
-                stream.src = 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
-                chat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+    function toggleChat() {
+        if (currentChat == 'kick') {
+            currentChat = 'twitch';
+            kickChat.style.display = 'none';
+            twitchChat.style.display = 'block';
+        } else {
+            currentChat = 'kick';
+            twitchChat.style.display = 'none';
+            kickChat.style.display = 'block';
+        }
+        setCookie('currentChat', currentChat, 365);
+    }
+
+    function toggleBothChats() {
+        if (chatContainer.classList.contains('double')) {
+            chatContainer.classList.remove('double');
+            twitchChat.style.display = 'none';
+            kickChat.style.display = 'block';
+        } else {
+            chatContainer.classList.add('double');
+            twitchChat.style.display = 'block';
+            kickChat.style.display = 'block';
+        }
+    }
+
+    function toggleChatPosition() {
+        if (window.innerWidth > 1000) {
+            if (body.style.flexDirection == 'row-reverse') {
+                body.style.flexDirection = 'row';
+                setCookie('chatPosition', 'left', 365);
             } else {
-                currentStream = 'kick';
-                stream.src = 'https://player.kick.com/xqc';
-                chat.src = 'https://kick.com/xqc/chatroom';
-            }
-            setCookie('currentStream', currentStream, 365);
-        }
-
-        function toggleChatPosition() {
-            if (window.innerWidth > 1000) {
-                if (body.style.flexDirection == 'row-reverse') {
-                    body.style.flexDirection = 'row';
-                    setCookie('chatPosition', 'left', 365);
-                } else {
-                    body.style.flexDirection = 'row-reverse';
-                    setCookie('chatPosition', 'right', 365);
-                }
+                body.style.flexDirection = 'row-reverse';
+                setCookie('chatPosition', 'right', 365);
             }
         }
+    }
 
-        window.addEventListener('resize', function() {
-            if (window.innerWidth <= 1000) {
-                body.style.flexDirection = 'column';
-            } else {
-                body.style.flexDirection = (getCookie('chatPosition') === 'right') ? 'row-reverse' : 'row';
-            }
-        });
-
-        function setCookie(cname, cvalue, exdays) {
-            var d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            var expires = "expires="+d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    window.addEventListener('resize', function() {
+        if (window.innerWidth <= 1000) {
+            body.style.flexDirection = 'column';
+        } else {
+            body.style.flexDirection = (getCookie('chatPosition') === 'right') ? 'row-reverse' : 'row';
         }
+    });
 
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
             }
-            return "";
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
         }
+        return "";
+    }
 </script>
 </body>
 </html>
