@@ -61,6 +61,15 @@
                 height: 50vh;
             }
         }
+                #kick-chat, #twitch-chat {
+            width: 100%;
+        }
+        .chat-container.double #kick-chat, .chat-container.double #twitch-chat {
+            width: 50%;
+        }
+        #twitch-chat {
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
@@ -69,7 +78,7 @@
     </div>
     <div id="chat-container" class="chat-container">
         <iframe id="kick-chat" src="https://kick.com/xqc/chatroom"></iframe>
-        <iframe id="twitch-chat" style="display: none;" src="https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout"></iframe>
+        <iframe id="twitch-chat" src="https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout"></iframe>
         <div id="buttons">
             <button onclick="toggleStream()">Stream</button>
             <button onclick="toggleChat()">Chat</button>
@@ -118,19 +127,42 @@
         setCookie('currentChat', currentChat, 365);
     }
 
+    function toggleChat() {
+        if (currentChat == 'kick') {
+            currentChat = 'twitch';
+            kickChat.style.visibility = 'hidden';
+            kickChat.style.display = 'none';
+            twitchChat.style.visibility = 'visible';
+            twitchChat.style.display = 'block';
+        } else {
+            currentChat = 'kick';
+            twitchChat.style.visibility = 'hidden';
+            twitchChat.style.display = 'none';
+            kickChat.style.visibility = 'visible';
+            kickChat.style.display = 'block';
+        }
+        setCookie('currentChat', currentChat, 365);
+    }
+
     function toggleBothChats() {
         if (chatContainer.classList.contains('double')) {
             chatContainer.classList.remove('double');
             if (currentChat === 'kick') {
+                twitchChat.style.visibility = 'hidden';
                 twitchChat.style.display = 'none';
+                kickChat.style.visibility = 'visible';
                 kickChat.style.display = 'block';
             } else {
+                twitchChat.style.visibility = 'visible';
                 twitchChat.style.display = 'block';
+                kickChat.style.visibility = 'hidden';
                 kickChat.style.display = 'none';
             }
         } else {
             chatContainer.classList.add('double');
+            twitchChat.style.visibility = 'visible';
             twitchChat.style.display = 'block';
+            kickChat.style.visibility = 'visible';
             kickChat.style.display = 'block';
         }
     }
