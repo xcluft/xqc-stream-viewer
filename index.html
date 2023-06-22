@@ -121,8 +121,13 @@
     function toggleBothChats() {
         if (chatContainer.classList.contains('double')) {
             chatContainer.classList.remove('double');
-            twitchChat.style.display = 'none';
-            kickChat.style.display = 'block';
+            if (currentChat === 'kick') {
+                twitchChat.style.display = 'none';
+                kickChat.style.display = 'block';
+            } else {
+                twitchChat.style.display = 'block';
+                kickChat.style.display = 'none';
+            }
         } else {
             chatContainer.classList.add('double');
             twitchChat.style.display = 'block';
