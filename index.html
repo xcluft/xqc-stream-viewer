@@ -61,7 +61,7 @@
                 height: 50vh;
             }
         }
-                #kick-chat, #twitch-chat {
+        #kick-chat, #twitch-chat {
             width: 100%;
         }
         .chat-container.double #kick-chat, .chat-container.double #twitch-chat {
@@ -80,105 +80,102 @@
     <div id="buttons">
         <button onclick="toggleStream()">Stream</button>
         <button onclick="toggleChat()">Chat</button>
-        <button onclick="toggleBothChats()">Both Chats</button>
-        <button onclick="toggleChatPosition()">Move Chat</button>
+        <button onclick="toggleBothChats()">Both</button>
+        <button onclick="toggleChatPosition()">Move</button>
     </div>
-</body>
+    <script>
+        var currentStream = getCookie('currentStream') || 'kick';
+        var currentChat = getCookie('currentChat') || 'kick';
+        var stream = document.getElementById('stream');
+        var chatContainer = document.getElementById('chat-container');
+        var body = document.body;
 
-<script>
-    var currentStream = getCookie('currentStream') || 'kick';
-    var currentChat = getCookie('currentChat') || 'kick';
-    var stream = document.getElementById('stream');
-    var chatContainer = document.getElementById('chat-container');
-    var body = document.body;
-
-    stream.src = currentStream == 'kick' ? 'https://player.kick.com/xqc' : 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
-    // Initialize with Kick chat
-    let chat = document.createElement('iframe');
-    chat.src = 'https://kick.com/xqc/chatroom';
-    chat.style.width = '100%';
-    chat.style.height = '100%';
-    chatContainer.appendChild(chat);
-
-    function toggleChat() {
-        chatContainer.innerHTML = ''; // Clear the chat container
-        if (currentChat == 'kick') {
-            currentChat = 'twitch';
-            chat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
-        } else {
-            currentChat = 'kick';
-            chat.src = 'https://kick.com/xqc/chatroom';
-        }
+        stream.src = currentStream == 'kick' ? 'https://player.kick.com/xqc' : 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
+        let chat = document.createElement('iframe');
+        chat.src = 'https://kick.com/xqc/chatroom';
+        chat.style.width = '100%';
+        chat.style.height = '100%';
         chatContainer.appendChild(chat);
-        setCookie('currentChat', currentChat, 365);
-    }
 
-    function toggleBothChats() {
-        chatContainer.innerHTML = ''; // Clear the chat container
-        if (chatContainer.classList.contains('double')) {
-            chatContainer.classList.remove('double');
-            chat = document.createElement('iframe');
-            chat.src = currentChat == 'kick' ? 'https://kick.com/xqc/chatroom' : 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
-            chat.style.width = '100%';
-            chat.style.height = '100%';
-            chatContainer.appendChild(chat);
-        } else {
-            chatContainer.classList.add('double');
-            let twitchChat = document.createElement('iframe');
-            twitchChat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
-            twitchChat.style.width = '50%';
-            twitchChat.style.height = '100%';
-            chatContainer.appendChild(twitchChat);
-            let kickChat = document.createElement('iframe');
-            kickChat.src = 'https://kick.com/xqc/chatroom';
-            kickChat.style.width = '50%';
-            kickChat.style.height = '100%';
-            chatContainer.appendChild(kickChat);
-        }
-    }
-</script>
-    
-    function toggleChatPosition() {
-        if (window.innerWidth > 1000) {
-            if (body.style.flexDirection == 'row-reverse') {
-                body.style.flexDirection = 'row';
-                setCookie('chatPosition', 'left', 365);
+        function toggleChat() {
+            chatContainer.innerHTML = '';
+            if (currentChat == 'kick') {
+                currentChat = 'twitch';
+                chat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
             } else {
-                body.style.flexDirection = 'row-reverse';
-                setCookie('chatPosition', 'right', 365);
+                currentChat = 'kick';
+                chat.src = 'https://kick.com/xqc/chatroom';
+            }
+            chatContainer.appendChild(chat);
+            setCookie('currentChat', currentChat, 365);
+        }
+
+        function toggleBothChats() {
+            chatContainer.innerHTML = '';
+            if (chatContainer.classList.contains('double')) {
+                chatContainer.classList.remove('double');
+                chat = document.createElement('iframe');
+                chat.src = currentChat == 'kick' ? 'https://kick.com/xqc/chatroom' : 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+                chat.style.width = '100%';
+                chat.style.height = '100%';
+                chatContainer.appendChild(chat);
+            } else {
+                chatContainer.classList.add('double');
+                let twitchChat = document.createElement('iframe');
+                twitchChat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+                twitchChat.style.width = '50%';
+                twitchChat.style.height = '100%';
+                chatContainer.appendChild(twitchChat);
+                let kickChat = document.createElement('iframe');
+                kickChat.src = 'https://kick.com/xqc/chatroom';
+                kickChat.style.width = '50%';
+                kickChat.style.height = '100%';
+                chatContainer.appendChild(kickChat);
             }
         }
-    }
 
-    window.addEventListener('resize', function() {
-        if (window.innerWidth <= 1000) {
-            body.style.flexDirection = 'column';
-        } else {
-            body.style.flexDirection = (getCookie('chatPosition') === 'right') ? 'row-reverse' : 'row';
-        }
-    });
-
-    function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        var expires = "expires="+d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-
-    function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
+        function toggleChatPosition() {
+            if (window.innerWidth > 1000) {
+                if (body.style.flexDirection == 'row-reverse') {
+                    body.style.flexDirection = 'row';
+                    setCookie('chatPosition', 'left', 365);
+                } else {
+                    body.style.flexDirection = 'row-reverse';
+                    setCookie('chatPosition', 'right', 365);
+                }
             }
         }
-        return "";
-    }
-</script>
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 1000) {
+                body.style.flexDirection = 'column';
+            } else {
+                body.style.flexDirection = (getCookie('chatPosition') === 'right') ? 'row-reverse' : 'row';
+            }
+        });
+
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+    </script>
 </body>
 </html>
+
