@@ -76,73 +76,67 @@
     <div id="stream-container" class="stream-container">
         <iframe id="stream" src="https://player.kick.com/xqc"></iframe>
     </div>
-    <div id="chat-container" class="chat-container">
-        <iframe id="kick-chat" src="https://kick.com/xqc/chatroom"></iframe>
-        <iframe id="twitch-chat" src="https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout"></iframe>
-        <div id="buttons">
-            <button onclick="toggleStream()">Stream</button>
-            <button onclick="toggleChat()">Chat</button>
-            <button onclick="toggleBothChats()">Both Chats</button>
-            <button onclick="toggleChatPosition()">Move Chat</button>
-        </div>
+    <div id="chat-container" class="chat-container"></div>
+    <div id="buttons">
+        <button onclick="toggleStream()">Stream</button>
+        <button onclick="toggleChat()">Chat</button>
+        <button onclick="toggleBothChats()">Both Chats</button>
+        <button onclick="toggleChatPosition()">Move Chat</button>
     </div>
+</body>
+
 <script>
     var currentStream = getCookie('currentStream') || 'kick';
     var currentChat = getCookie('currentChat') || 'kick';
     var stream = document.getElementById('stream');
-    var twitchChat = document.getElementById('twitch-chat');
-    var kickChat = document.getElementById('kick-chat');
     var chatContainer = document.getElementById('chat-container');
     var body = document.body;
 
     stream.src = currentStream == 'kick' ? 'https://player.kick.com/xqc' : 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
-    kickChat.src = 'https://kick.com/xqc/chatroom';
-    twitchChat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+    // Initialize with Kick chat
+    let chat = document.createElement('iframe');
+    chat.src = 'https://kick.com/xqc/chatroom';
+    chat.style.width = '100%';
+    chat.style.height = '100%';
+    chatContainer.appendChild(chat);
 
-    if (getCookie('chatPosition') === 'right') {
-        body.style.flexDirection = 'row-reverse';
-    }
-
-function toggleStream() {
-    if (currentStream == 'kick') {
-        currentStream = 'twitch';
-        stream.src = 'https://player.twitch.tv/?channel=xqc&parent=xcluft.github.io';
-    } else {
-        currentStream = 'kick';
-        stream.src = 'https://player.kick.com/xqc';
-    }
-    setCookie('currentStream', currentStream, 365);
-}
-
-function toggleChat() {
-    if (currentChat == 'kick') {
-        currentChat = 'twitch';
-        kickChat.style.display = 'none';
-        twitchChat.style.display = 'block';
-    } else {
-        currentChat = 'kick';
-        twitchChat.style.display = 'none';
-        kickChat.style.display = 'block';
-    }
-    setCookie('currentChat', currentChat, 365);
-}
-
-function toggleBothChats() {
-    if (chatContainer.classList.contains('double')) {
-        chatContainer.classList.remove('double');
-        if (currentChat === 'kick') {
-            twitchChat.style.display = 'none';
-            kickChat.style.display = 'block';
+    function toggleChat() {
+        chatContainer.innerHTML = ''; // Clear the chat container
+        if (currentChat == 'kick') {
+            currentChat = 'twitch';
+            chat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
         } else {
-            kickChat.style.display = 'none';
-            twitchChat.style.display = 'block';
+            currentChat = 'kick';
+            chat.src = 'https://kick.com/xqc/chatroom';
         }
-    } else {
-        chatContainer.classList.add('double');
-        kickChat.style.display = 'block';
-        twitchChat.style.display = 'block';
+        chatContainer.appendChild(chat);
+        setCookie('currentChat', currentChat, 365);
     }
-}
+
+    function toggleBothChats() {
+        chatContainer.innerHTML = ''; // Clear the chat container
+        if (chatContainer.classList.contains('double')) {
+            chatContainer.classList.remove('double');
+            chat = document.createElement('iframe');
+            chat.src = currentChat == 'kick' ? 'https://kick.com/xqc/chatroom' : 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+            chat.style.width = '100%';
+            chat.style.height = '100%';
+            chatContainer.appendChild(chat);
+        } else {
+            chatContainer.classList.add('double');
+            let twitchChat = document.createElement('iframe');
+            twitchChat.src = 'https://www.twitch.tv/embed/xqc/chat?parent=xcluft.github.io&darkpopout';
+            twitchChat.style.width = '50%';
+            twitchChat.style.height = '100%';
+            chatContainer.appendChild(twitchChat);
+            let kickChat = document.createElement('iframe');
+            kickChat.src = 'https://kick.com/xqc/chatroom';
+            kickChat.style.width = '50%';
+            kickChat.style.height = '100%';
+            chatContainer.appendChild(kickChat);
+        }
+    }
+</script>
     
     function toggleChatPosition() {
         if (window.innerWidth > 1000) {
